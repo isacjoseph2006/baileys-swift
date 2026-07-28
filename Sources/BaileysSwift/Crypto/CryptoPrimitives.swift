@@ -7,7 +7,7 @@ import Foundation
 /// `Buffer.concat([ciphertext, tag])` convention), HKDF-SHA256, SHA-256,
 /// HMAC-SHA256, and MD5 (only used for the registration `buildHash`).
 public enum WACrypto {
-    public struct KeyPair {
+    public struct KeyPair: Codable, Equatable {
         public let privateKey: Data
         public let publicKey: Data
 
@@ -15,6 +15,12 @@ public enum WACrypto {
             self.privateKey = privateKey
             self.publicKey = publicKey
         }
+    }
+
+    public static func randomBytes(_ count: Int) -> Data {
+        var bytes = [UInt8](repeating: 0, count: count)
+        for i in 0..<count { bytes[i] = UInt8.random(in: 0...255) }
+        return Data(bytes)
     }
 
     public static func generateX25519KeyPair() -> KeyPair {

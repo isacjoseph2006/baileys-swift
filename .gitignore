@@ -2,3 +2,9 @@
 .swiftpm/
 *.xcodeproj
 .DS_Store
+
+# Contains private keys and session credentials — never commit this.
+auth_info/
+
+# Claude Code session-local state, not part of the project.
+.claude/
